@@ -7,17 +7,20 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "prettier": "prettier \"src/**/*.ts\" \"test/**/*.ts\"",
+    "prettier:fix": "yarn prettier --write",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "lint:fix": "yarn lint --fix",
+    "validate": "yarn prettier --list-different && yarn lint"
   },
   "dependencies": {
     "@hapi/joi": "^17.0.0",
@@ -38,7 +41,9 @@
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.5",
     "@types/supertest": "^2.0.8",
+    "husky": "^4.0.10",
     "jest": "^24.9.0",
+    "lint-staged": "^9.5.0",
     "prettier": "^1.18.2",
     "supertest": "^4.0.2",
     "ts-jest": "^24.1.0",
@@ -46,6 +51,8 @@
     "ts-node": "^8.4.1",
     "tsconfig-paths": "^3.9.0",
     "tslint": "^5.20.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.1.0",
     "typescript": "^3.6.3"
   },
   "jest": {
@@ -61,5 +68,13 @@
     },
     "coverageDirectory": "./coverage",
     "testEnvironment": "node"
+  },
+  "lint-staged": {
+    "**/*.{ts}": ["yarn prettier:fix","yarn lint:fix", "git add"]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

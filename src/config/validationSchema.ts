@@ -7,4 +7,4 @@ export default Joi.object({
   PORT: Joi.number().default(3000),
   DATABASE_HOST: Joi.string().required(),
   DATABASE_PORT: Joi.number().required(),
-})
+});
