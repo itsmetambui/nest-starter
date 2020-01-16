@@ -16,11 +16,11 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "prettier": "prettier --list-different \"./**/*.{ts,js,json,md}\"",
+    "prettier": "prettier \"./**/*.{ts,js,json,md}\"",
     "prettier:fix": "yarn prettier --write",
     "lint": "eslint . --ext .js,.ts,",
     "lint:fix": "yarn lint --fix",
-    "validate": "yarn prettier && yarn lint"
+    "validate": "yarn prettier --list-different && yarn lint"
   },
   "dependencies": {
     "@hapi/joi": "^17.0.0",
@@ -74,9 +74,13 @@
     "testEnvironment": "node"
   },
   "lint-staged": {
-    "**/*.{ts}": [
+    "**/*.{ts|js}": [
       "yarn prettier:fix",
       "yarn lint:fix",
+      "git add"
+    ],
+    "!**/*.{ts|js}": [
+      "yarn prettier:fix",
       "git add"
     ]
   },
