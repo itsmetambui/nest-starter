@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import AppController from './app.controller';
+import AppService from './app.service';
 import configuration from './config';
 import configurationSchema from './config/validationSchema';
 
@@ -20,4 +20,4 @@ import configurationSchema from './config/validationSchema';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export default class AppModule {}

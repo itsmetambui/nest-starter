@@ -16,11 +16,11 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "prettier": "prettier \"src/**/*.ts\" \"test/**/*.ts\"",
+    "prettier": "prettier --list-different \"./**/*.{ts,js,json,md}\"",
     "prettier:fix": "yarn prettier --write",
-    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "lint": "eslint . --ext .js,.ts,",
     "lint:fix": "yarn lint --fix",
-    "validate": "yarn prettier --list-different && yarn lint"
+    "validate": "yarn prettier && yarn lint"
   },
   "dependencies": {
     "@hapi/joi": "^17.0.0",
@@ -41,6 +41,13 @@
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.5",
     "@types/supertest": "^2.0.8",
+    "@typescript-eslint/eslint-plugin": "^2.16.0",
+    "@typescript-eslint/parser": "^2.16.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^6.3.1",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-jest": "^23.6.0",
     "husky": "^4.0.10",
     "jest": "^24.9.0",
     "lint-staged": "^9.5.0",
@@ -50,9 +57,6 @@
     "ts-loader": "^6.1.1",
     "ts-node": "^8.4.1",
     "tsconfig-paths": "^3.9.0",
-    "tslint": "^5.20.0",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-plugin-prettier": "^2.1.0",
     "typescript": "^3.6.3"
   },
   "jest": {
@@ -70,11 +74,18 @@
     "testEnvironment": "node"
   },
   "lint-staged": {
-    "**/*.{ts}": ["yarn prettier:fix","yarn lint:fix", "git add"]
+    "**/*.{ts}": [
+      "yarn prettier:fix",
+      "yarn lint:fix",
+      "git add"
+    ]
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "engines": {
+    "node": ">=8.10.0"
   }
 }
