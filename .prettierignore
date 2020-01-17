@@ -35,3 +35,9 @@ lerna-debug.log*
 
 # environments
 .env
+
+# others
+.gitignore
+.prettierignore
+.eslintignore
+yarn.lock

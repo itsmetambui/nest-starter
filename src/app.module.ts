@@ -1,20 +1,17 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 
+import { MikroOrmModule } from 'nestjs-mikro-orm';
 import AppController from './app.controller';
 import AppService from './app.service';
-import configuration from './config';
-import configurationSchema from './config/validationSchema';
+import MikroConfigService from './config/services/MikroConfigService';
+import AppConfigModule from './config/config.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      load: configuration,
-      validationSchema: configurationSchema,
-      validationOptions: {
-        allowUnknown: false,
-        abortEarly: true,
-      },
+    AppConfigModule,
+    MikroOrmModule.forRootAsync({
+      imports: [AppConfigModule],
+      useClass: MikroConfigService,
     }),
   ],
   controllers: [AppController],
