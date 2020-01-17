@@ -1,19 +1,12 @@
 import { Module } from '@nestjs/common';
 
-import { MikroOrmModule } from 'nestjs-mikro-orm';
 import AppController from './app.controller';
 import AppService from './app.service';
-import MikroConfigService from './config/services/MikroConfigService';
-import AppConfigModule from './config/config.module';
+import AppConfigModule from './modules/config/config.module';
+import OrmModule from './modules/orm/orm.module';
 
 @Module({
-  imports: [
-    AppConfigModule,
-    MikroOrmModule.forRootAsync({
-      imports: [AppConfigModule],
-      useClass: MikroConfigService,
-    }),
-  ],
+  imports: [AppConfigModule, OrmModule],
   controllers: [AppController],
   providers: [AppService],
 })
