@@ -6,7 +6,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
-export default class MikroConfigService implements MikroOrmOptionsFactory {
+export class MikroConfigService implements MikroOrmOptionsFactory {
   private logger = new Logger('Mikro ORM');
 
   constructor(private readonly configService: ConfigService) {}

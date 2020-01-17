@@ -16,4 +16,4 @@ import configurationSchema from './validationSchema';
   ],
   exports: [ConfigModule],
 })
-export default class AppConfigModule {}
+export class AppConfigModule {}

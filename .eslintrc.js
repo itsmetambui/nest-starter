@@ -21,5 +21,7 @@ module.exports = {
     'import/no-named-as-default-member': 'off',
     // https://github.com/typescript-eslint/typescript-eslint/blob/master/docs/getting-started/linting/FAQ.md#the-indent--typescript-eslintindent-rules
     '@typescript-eslint/indent': 'off',
+    // nestjs
+    'import/prefer-default-export': 'off',
   },
 };

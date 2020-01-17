@@ -1,4 +1,2 @@
-import User from './User';
-import BaseEntity from './BaseEntity';
-
-export { User, BaseEntity };
+export * from './User';
+export * from './BaseEntity';

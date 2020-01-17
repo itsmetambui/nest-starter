@@ -2,10 +2,10 @@ import { Entity, Property } from 'mikro-orm';
 import { IsEmail } from 'class-validator';
 import * as bcrypt from 'bcrypt';
 
-import BaseEntity from './BaseEntity';
+import { BaseEntity } from './BaseEntity';
 
 @Entity()
-export default class User extends BaseEntity {
+export class User extends BaseEntity {
   @Property()
   @IsEmail()
   email: string;
