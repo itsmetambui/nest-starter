@@ -1,7 +1,7 @@
 version: 2.1 # use CircleCI 2.1
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
-    working_directory: ~/mern-starter # directory where steps will run
+    working_directory: ~/nest-starter # directory where steps will run
     docker: # run the steps with Docker
       - image: circleci/node:10.16.3 # ...with this image as the primary container; this is where all `steps` will run
       - image: mongo:4.2.0 # and this image as the secondary service container
@@ -21,10 +21,14 @@ jobs: # a collection of steps
           paths:
             - ./node_modules
       - run:
-          name: Install JUnit coverage reporter
-          command: yarn add --dev jest-junit
+          name: ESLint check
+          command: yarn lint --format junit -o reports/junit/js-lint-results.xml
       - run:
-          name: Run tests with JUnit as reporter
+          name: Unit Tests check
           command: yarn test --ci --runInBand --reporters=default --reporters=jest-junit
           environment:
             JEST_JUNIT_OUTPUT_DIR: 'reports/junit/js-test-results.xml'
+      - store_test_results:
+          path: reports/junit
+      - store_artifacts:
+          path: reports/junit
