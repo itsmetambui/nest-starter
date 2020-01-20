@@ -12,7 +12,7 @@ jobs: # a collection of steps
           command: 'sudo npm install -g yarn@latest'
       - restore_cache: # special step to restore the dependency cache
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
           name: Install dependencies
           command: yarn install
@@ -22,7 +22,7 @@ jobs: # a collection of steps
             - ./node_modules
       - run:
           name: Install JUnit coverage reporter
-          command: yarn add --D jest-junit
+          command: yarn add --dev jest-junit
       - run:
           name: Run tests with JUnit as reporter
           command: jest --ci --runInBand --reporters=default --reporters=jest-junit
