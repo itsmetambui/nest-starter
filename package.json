@@ -57,6 +57,7 @@
     "eslint-plugin-jest": "^23.6.0",
     "husky": "^4.0.10",
     "jest": "^24.9.0",
+    "jest-junit": "^10.0.0",
     "lint-staged": "^9.5.0",
     "prettier": "^1.18.2",
     "supertest": "^4.0.2",
@@ -77,8 +78,12 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
-    "coverageDirectory": "./coverage",
-    "testEnvironment": "node"
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node",
+    "reporters": [
+      "default",
+      "jest-junit"
+    ]
   },
   "lint-staged": {
     "**/*.{ts|js}": [
