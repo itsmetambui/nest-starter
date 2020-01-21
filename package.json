@@ -94,9 +94,6 @@
     "!**/*.{ts|js}": [
       "yarn prettier:fix",
       "git add"
-    ],
-    ".circleci/config.yml": [
-      "circleci config validate"
     ]
   },
   "husky": {
